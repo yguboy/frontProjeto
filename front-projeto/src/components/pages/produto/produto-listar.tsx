@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Produto } from "../../../models/Produto";
 
 // 1 - Implementar o cadastro a partir do formulario
@@ -6,45 +6,26 @@ import { Produto } from "../../../models/Produto";
 // 3 - Implementar a alteração
 
 function ProdutoListar() {
-    const[produtos, setProdutos] = useState<Produto[]>([]);
+    const [produtos, setProdutos] = useState<Produto[]>([]);
 
-    //Evento de carregamento do componente 
+    // Evento de carregamento do componente 
     useEffect(() => {
         console.log("Executar algo ao carregar o componente...");
         carregarProdutos();
     }, []);
 
     function carregarProdutos() {
-        //FETCH ou AXIOS
+        // FETCH ou AXIOS
         fetch("http://localhost:5076/api/produto/listar")
-        .then((resposta) => resposta.json())
-        .then((produtos : Produto[]) => {
-            setProdutos(produtos);
-            //console.table(produtos);
-        })
-        .catch((erro) => {
-            console.log("Deu erro po.");
-        });
-    }
-
-    function cadastrar() {
-        const produto : Produto = {
-            nome : "Teste APP Visual",
-            descricao : "Teste APP Visual",
-            preco : 150,
-            quantidade : 10
-        };
-        fetch("http://localhost:5076/api/produto/cadastrar", {
-            method : "POST",
-            headers : {
-                "Content-Type" : "application/json"
-            },
-            body : JSON.stringify(produto),
-        })
             .then((resposta) => resposta.json())
-            .then((produtoCadastrado : Produto) => {
-                console.log(produtoCadastrado);
+            .then((produtos: Produto[]) => {
+                setProdutos(produtos);
+                // console.table(produtos);
+            })
+            .catch((erro) => {
+                console.log("Deu erro po.");
             });
+    }
 
     return (
         <div>
@@ -73,7 +54,6 @@ function ProdutoListar() {
                     ))}
                 </tbody>
             </table>
-            <button onClick={cadastrar}> Cadastrar </button>
         </div>
     );
 }
