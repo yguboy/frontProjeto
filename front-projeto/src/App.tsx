@@ -3,6 +3,7 @@ import ProdutoListar from './components/pages/produto/produto-listar';
 import ConsultarCep from './components/pages/cep/consultar-cep';
 import ProdutoCadastrar from './components/pages/produto/produto-cadastrar';
 import { BrowserRouter, Link, Route, Routes } from 'react-router-dom';
+import ProdutoAlterar from './components/pages/produto/produto-alterar';
 
 function App() {
   return (
@@ -20,6 +21,7 @@ function App() {
           <Route path="/" element={<ProdutoListar></ProdutoListar>}></Route>
           <Route path="/produto/listar" element={<ProdutoListar></ProdutoListar>}></Route>
           <Route path="/produto/cadastrar" element={<ProdutoCadastrar></ProdutoCadastrar>}></Route>
+          <Route path="/produto/alterar/:id?" element={<ProdutoAlterar></ProdutoAlterar>}></Route>
           <Route path="/cep/consultar" element={<ConsultarCep></ConsultarCep>}></Route>
         </Routes>
         <footer>

@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Produto } from "../../../models/Produto";
+import axios from "axios";
+import { Link } from "react-router-dom";
 
 // 1 - Implementar o cadastro a partir do formulario
 // 2 - Implementar a remoção 
@@ -27,6 +29,14 @@ function ProdutoListar() {
             });
     }
 
+    function remover(id : string) {
+        axios
+            .delete<Produto[]>(`http://localhost:5076/api/produto/deletar/${id}`)
+            .then((resposta) => {
+                setProdutos(resposta.data);
+            });
+    }
+
     return (
         <div>
             <h1> Listar Produto </h1>
@@ -39,6 +49,8 @@ function ProdutoListar() {
                         <th style={{ border: "1px solid black" }}> Preço </th>
                         <th style={{ border: "1px solid black" }}> Quantidade </th>
                         <th style={{ border: "1px solid black" }}> Criado Em </th>
+                        <th style={{ border: "1px solid black" }}> Remover </th>
+                        <th style={{ border: "1px solid black" }}> Alterar </th>
                     </tr>
                 </thead>
                 <tbody>
@@ -50,6 +62,12 @@ function ProdutoListar() {
                             <td style={{ border: "1px solid black" }}> ${produto.preco} </td>
                             <td style={{ border: "1px solid black" }}> {produto.quantidade} </td>
                             <td style={{ border: "1px solid black" }}> {produto.criadoEm} </td>
+                            <td>
+                                <button onClick={() => { remover(produto.id! ); }}> Remover </button> 
+                            </td>
+                            <td> 
+                                <Link to={`/produto/alterar/${produto.id!}`}> Alterar </Link> 
+                            </td>
                         </tr>        
                     ))}
                 </tbody>
