@@ -3,10 +3,6 @@ import { Produto } from "../../../models/Produto";
 import axios from "axios";
 import { Link } from "react-router-dom";
 
-// 1 - Implementar o cadastro a partir do formulario
-// 2 - Implementar a remoção 
-// 3 - Implementar a alteração
-
 function ProdutoListar() {
     const [produtos, setProdutos] = useState<Produto[]>([]);
 
